@@ -1,0 +1,9 @@
+[package]
+name = "demo-wallet"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ecash-client = { path = "../ecash-client" }
+tokio = { workspace = true }
+anyhow = { workspace = true }

@@ -1,0 +1,37 @@
+[package]
+name = "ecash-client"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ecash-core = { path = "../ecash-core" }
+
+# HTTP client
+reqwest = { version = "0.12", features = ["json", "rustls-tls"], default-features = false }
+tokio = { version = "1.42", features = ["full"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Crypto
+rsa = "0.9"
+sha2 = "0.10"
+rand = "0.8"
+hex = "0.4"
+base64 = "0.22"
+num-bigint = "0.4"
+
+# Storage
+rusqlite = { version = "0.32", features = ["bundled"] }
+
+# Utils
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1.11", features = ["v4", "serde"] }
+thiserror = "2.0"
+anyhow = "1.0"
+tracing = "0.1"
+
+# QR codes
+qrcode = "0.14"
+image = "0.25"

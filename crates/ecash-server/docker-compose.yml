@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ecash-postgres
+    environment:
+      POSTGRES_DB: ecash_db
+      POSTGRES_USER: ecash_user
+      POSTGRES_PASSWORD: ecash_password_2024
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ecash_user -d ecash_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: ecash-redis
+    command: redis-server --requirepass redis_password_2024
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  ecash-server:
+    build:
+      context: ../..
+      dockerfile: crates/ecash-server/Dockerfile
+    container_name: ecash-server
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql://ecash_user:ecash_password_2024@postgres:5432/ecash_db
+      - REDIS_URL=redis://:redis_password_2024@redis:6379
+      - SERVER_HOST=0.0.0.0
+      - SERVER_PORT=8080
+      - INSTITUTION_ID=inst_primary
+      - KEY_ID=key_001
+      - TOKEN_EXPIRY_DAYS=90
+      - DENOMINATIONS=10,50,100,500,1000
+      - RUST_LOG=info,ecash_server=debug
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
