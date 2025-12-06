@@ -23,7 +23,7 @@ This project implements a complete blind signature eCash system with strong priv
 ```
 ┌──────────────┐         ┌──────────────┐         ┌──────────────┐
 │              │  HTTPS  │              │         │              │
-│    Client    │────────▶│     Nginx    │────────▶│  API Server  │
+│    Client    │────────▶│     Nginx   │────────▶│  API Server  │
 │   (Wallet)   │         │ (Rate Limit) │         │    (Axum)    │
 │              │         │              │         │              │
 └──────────────┘         └──────────────┘         └───────┬──────┘
