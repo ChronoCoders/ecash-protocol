@@ -36,7 +36,7 @@ pub struct InstitutionConfig {
 
 impl Config {
     pub fn from_env() -> anyhow::Result<Self> {
-        dotenv::dotenv().ok();
+        dotenvy::dotenv().ok();
 
         let denominations: Vec<u64> = env::var("DENOMINATIONS")?
             .split(',')
