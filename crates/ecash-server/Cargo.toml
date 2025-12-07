@@ -29,5 +29,6 @@ uuid = { version = "1.0", features = ["v4", "serde"] }
 chrono = { workspace = true }
 dotenvy = "0.15"
 rsa = { workspace = true }
+rand = { workspace = true }
 num-bigint = { workspace = true }
 base64 = { workspace = true }
