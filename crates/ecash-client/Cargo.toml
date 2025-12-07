@@ -2,36 +2,26 @@
 name = "ecash-client"
 version = "0.1.0"
 edition = "2021"
+authors = ["ChronoCoders"]
+description = "Client SDK for eCash protocol with wallet functionality"
+license = "MIT"
+repository = "https://github.com/ChronoCoders/ecash-protocol"
+homepage = "https://chronocoders.github.io/ecash-protocol"
+documentation = "https://docs.rs/ecash-client"
+keywords = ["ecash", "wallet", "client", "sdk", "cryptography"]
+categories = ["cryptography", "api-bindings"]
 
 [dependencies]
-ecash-core = { path = "../ecash-core" }
-
-# HTTP client
+ecash-core = { path = "../ecash-core", version = "0.1.0" }
+tokio = { workspace = true }
 reqwest = { version = "0.12", features = ["json", "rustls-tls"], default-features = false }
-tokio = { version = "1.42", features = ["full"] }
-
-# Serialization
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-
-# Crypto
-rsa = "0.9"
-sha2 = "0.10"
-rand = "0.8"
-hex = "0.4"
-base64 = "0.22"
-num-bigint = "0.4"
-
-# Storage
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
 rusqlite = { version = "0.32", features = ["bundled"] }
-
-# Utils
-chrono = { version = "0.4", features = ["serde"] }
-uuid = { version = "1.11", features = ["v4", "serde"] }
-thiserror = "2.0"
-anyhow = "1.0"
-tracing = "0.1"
-
-# QR codes
+chrono = { workspace = true }
+rsa = { workspace = true }
 qrcode = "0.14"
 image = "0.25"
+base64 = { workspace = true }

@@ -2,17 +2,24 @@
 name = "ecash-core"
 version = "0.1.0"
 edition = "2021"
+authors = ["ChronoCoders"]
+description = "RSA-3072 blind signature protocol for anonymous digital cash"
+license = "MIT"
+repository = "https://github.com/ChronoCoders/ecash-protocol"
+homepage = "https://chronocoders.github.io/ecash-protocol"
+documentation = "https://docs.rs/ecash-core"
+keywords = ["cryptography", "blind-signatures", "ecash", "chaum", "rsa"]
+categories = ["cryptography"]
 
 [dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
 rsa = { workspace = true }
 sha2 = { workspace = true }
 rand = { workspace = true }
 num-bigint = { workspace = true }
 num-traits = { workspace = true }
-serde = { workspace = true }
-serde_json = { workspace = true }
-thiserror = { workspace = true }
-anyhow = { workspace = true }
 hex = { workspace = true }
 base64 = { workspace = true }
 chrono = { workspace = true }
